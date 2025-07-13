@@ -155,15 +155,22 @@
       const formData = new FormData(form);
       const queryString = new URLSearchParams(formData).toString();
 
-      const resultDiv = document.getElementById("result");
-      resultDiv.innerHTML = "<div class='text-info'>Mengirim data...</div>";
+      try {
+  // Menampilkan notifikasi SweetAlert loading
+  Swal.fire({
+    title: 'Mengirim data...',
+    text: 'Proses pembuatan invoice, harap tunggu...',
+    icon: 'info',
+    showConfirmButton: false,
+    allowOutsideClick: false
+  });
 
-     try {
+  // Mengirim data ke backend
   const response = await fetch(scriptURL + '?' + queryString);
   const result = await response.json();
 
   if (result.status === 'success') {
-    // Menampilkan notifikasi SweetAlert untuk sukses
+    // Menampilkan SweetAlert untuk sukses
     Swal.fire({
       title: 'Invoice Berhasil!',
       text: 'Invoice berhasil dibuat! Klik "Download" untuk mengunduh PDF.',
@@ -183,7 +190,7 @@
     balanceInput.value = "";
 
   } else {
-    // Menampilkan notifikasi SweetAlert untuk error
+    // Menampilkan SweetAlert untuk error
     Swal.fire({
       title: 'Gagal!',
       text: result.message,
@@ -193,7 +200,7 @@
   }
 
 } catch (err) {
-  // Menampilkan notifikasi SweetAlert untuk error saat mengirim data
+  // Menampilkan SweetAlert untuk error saat mengirim data
   Swal.fire({
     title: 'Gagal Mengirim Data!',
     text: 'Terjadi kesalahan saat mengirim data ke server.',
@@ -202,7 +209,6 @@
   });
   console.error(err);
 }
-
     });
   </script>
 </body>
