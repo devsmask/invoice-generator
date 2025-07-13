@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>YCB-Invoice</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     body {
       background: #f8f9fa;
@@ -157,21 +158,51 @@
       const resultDiv = document.getElementById("result");
       resultDiv.innerHTML = "<div class='text-info'>Mengirim data...</div>";
 
-      try {
-        const response = await fetch(scriptURL + '?' + queryString);
-        const result = await response.json();
+     try {
+  const response = await fetch(scriptURL + '?' + queryString);
+  const result = await response.json();
 
-        if (result.status === 'success') {
-          resultDiv.innerHTML = `<div class='alert alert-success'>Invoice berhasil dibuat! <a href="${result.pdfUrl}" target="_blank">Download Invoice PDF</a></div>`;
-          form.reset();
-          balanceInput.value = "";
-        } else {
-          resultDiv.innerHTML = `<div class='alert alert-danger'>${result.message}</div>`;
-        }
-      } catch (err) {
-        resultDiv.innerHTML = "<div class='alert alert-danger'>Gagal mengirim data.</div>";
-        console.error(err);
+  if (result.status === 'success') {
+    // Menampilkan notifikasi SweetAlert untuk sukses
+    Swal.fire({
+      title: 'Invoice Berhasil!',
+      text: 'Invoice berhasil dibuat! Klik "Download" untuk mengunduh PDF.',
+      icon: 'success',
+      confirmButtonText: 'Download',
+      showCancelButton: true,
+      cancelButtonText: 'Tutup'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Jika tombol "Download" diklik, buka link PDF di tab baru
+        window.open(result.pdfUrl, '_blank');
       }
+    });
+
+    // Reset form dan input balance
+    form.reset();
+    balanceInput.value = "";
+
+  } else {
+    // Menampilkan notifikasi SweetAlert untuk error
+    Swal.fire({
+      title: 'Gagal!',
+      text: result.message,
+      icon: 'error',
+      confirmButtonText: 'Tutup'
+    });
+  }
+
+} catch (err) {
+  // Menampilkan notifikasi SweetAlert untuk error saat mengirim data
+  Swal.fire({
+    title: 'Gagal Mengirim Data!',
+    text: 'Terjadi kesalahan saat mengirim data ke server.',
+    icon: 'error',
+    confirmButtonText: 'Tutup'
+  });
+  console.error(err);
+}
+
     });
   </script>
 </body>
