@@ -9,10 +9,16 @@
   <style>
     body {
       background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+    .container-fluid {
+      padding: 1rem;
     }
     .content-wrapper {
       max-width: 700px;
-      margin: 2rem auto;
+      width: 100%;
+      margin: 0 auto;
       background: #fff;
       border-radius: 0.5rem;
       box-shadow: 0 0 15px rgba(0,0,0,0.05);
@@ -33,108 +39,118 @@
       text-align: center;
     }
     .submit-btn-container button {
-      width: 200px;
+      max-width: 200px;
+      width: 100%;
+    }
+    @media (max-width: 576px) {
+      .content-wrapper {
+        padding: 1rem;
+        box-shadow: none;
+        border-radius: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="content-wrapper">
-    <h2 class="form-title">Form Invoice</h2>
-    <form id="invoiceForm">
-      <!-- Semua field tetap -->
-      <div class="form-group">
-        <label>Payment Term</label>
-        <select name="PaymentTerm" class="form-select">
-          <option value="Cash/ Card">Cash/ Card</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Due On</label>
-        <input type="date" name="DueOn" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label>Currency</label>
-        <select name="Currency" class="form-select">
-          <option value="Rupiah/ Dollar">Rupiah/ Dollar</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Customer Name</label>
-        <input type="text" name="CustomerName" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label>Address</label>
-        <textarea name="Address" class="form-control"></textarea>
-      </div>
-      <div class="form-group">
-        <label>Total Person</label>
-        <input type="number" name="TotalPerson" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label>Telp.</label>
-        <input type="text" name="Telp" class="form-control">
-      </div>
-      <div class="form-group">
-        <label>Company Name</label>
-        <input type="text" name="CompanyName" class="form-control">
-      </div>
-      <div class="form-group">
-        <label>Boat Name</label>
-        <select name="BoatName" class="form-select">
-          <option value="MORGAN">MORGAN</option>
-          <option value="YCB SEAVIEW">YCB SEAVIEW</option>
-          <option value="ACCURA 55">ACCURA 55</option>
-          <option value="ACCURA 49">ACCURA 49</option>
-          <option value="ACCURA 39">ACCURA 39</option>
-          <option value="ACCURA 42">ACCURA 42</option>
-          <option value="BLUE CATT">BLUE CATT</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Periode</label>
-        <input type="date" name="Periode" class="form-control" required>
-      </div>
-      <div class="form-group">
-        <label>Packages</label>
-        <select name="Packages" class="form-select">
-          <option value="Full day trip 8 hours to Gili/ Lombok Island">Full day trip 8 hours to Gili/ Lombok Island</option>
-          <option value="Full day trip 8 hours to Penida/ Lembongan Island">Full day trip 8 hours to Penida/ Lembongan Island</option>
-          <option value="Half day trip 4 hours Nusa Dua Area">Half day trip 4 hours Nusa Dua Area</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Activities</label>
-        <textarea name="Activities" class="form-control" readonly>Snorkeling, Fun Fishing</textarea>
-      </div>
-      <div class="form-group">
-        <label>Inclusions</label>
-        <textarea name="Inclusions" class="form-control" readonly>Transfer Hotel, Soft drink, Mineral Waters, Fruits and Snacks, Lunch</textarea>
-      </div>
-      <div class="form-group">
-        <label>Noted</label>
-        <textarea name="Noted" class="form-control"></textarea>
-      </div>
-      <div class="form-group">
-        <label>Total (Rp.)</label>
-        <input type="text" name="Total" class="form-control" required inputmode="numeric">
-      </div>
-      <div class="form-group">
-        <label>Deposit (Rp.)</label>
-        <input type="text" name="Deposit" class="form-control" required inputmode="numeric">
-      </div>
-      <div class="form-group">
-        <label>Balance (Rp.)</label>
-        <input type="text" name="Balance" class="form-control" readonly>
-      </div>
-      <div class="form-group">
-        <label>Passcode</label>
-        <input type="password" name="passcode" class="form-control" required>
-      </div>
-      <div class="form-group submit-btn-container">
-        <button type="submit" class="btn btn-primary">Submit Invoice</button>
-      </div>
-      <div id="result" class="mt-3"></div>
-    </form>
+  <div class="container-fluid">
+    <div class="content-wrapper">
+      <h2 class="form-title">Form Invoice</h2>
+      <form id="invoiceForm">
+        <!-- Semua field tetap -->
+        <div class="form-group">
+          <label>Payment Term</label>
+          <select name="PaymentTerm" class="form-select">
+            <option value="Cash/ Card">Cash/ Card</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Due On</label>
+          <input type="date" name="DueOn" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Currency</label>
+          <select name="Currency" class="form-select">
+            <option value="Rupiah/ Dollar">Rupiah/ Dollar</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Customer Name</label>
+          <input type="text" name="CustomerName" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <textarea name="Address" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Total Person</label>
+          <input type="number" name="TotalPerson" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Telp.</label>
+          <input type="text" name="Telp" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Company Name</label>
+          <input type="text" name="CompanyName" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Boat Name</label>
+          <select name="BoatName" class="form-select">
+            <option value="MORGAN">MORGAN</option>
+            <option value="YCB SEAVIEW">YCB SEAVIEW</option>
+            <option value="ACCURA 55">ACCURA 55</option>
+            <option value="ACCURA 49">ACCURA 49</option>
+            <option value="ACCURA 39">ACCURA 39</option>
+            <option value="ACCURA 42">ACCURA 42</option>
+            <option value="BLUE CATT">BLUE CATT</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Periode</label>
+          <input type="date" name="Periode" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Packages</label>
+          <select name="Packages" class="form-select">
+            <option value="Full day trip 8 hours to Gili/ Lombok Island">Full day trip 8 hours to Gili/ Lombok Island</option>
+            <option value="Full day trip 8 hours to Penida/ Lembongan Island">Full day trip 8 hours to Penida/ Lembongan Island</option>
+            <option value="Half day trip 4 hours Nusa Dua Area">Half day trip 4 hours Nusa Dua Area</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Activities</label>
+          <textarea name="Activities" class="form-control">Snorkeling, Fun Fishing</textarea>
+        </div>
+        <div class="form-group">
+          <label>Inclusions</label>
+          <textarea name="Inclusions" class="form-control">Transfer Hotel, Soft drink, Mineral Waters, Fruits and Snacks, Lunch</textarea>
+        </div>
+        <div class="form-group">
+          <label>Noted</label>
+          <textarea name="Noted" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Total (Rp.)</label>
+          <input type="text" name="Total" class="form-control" required inputmode="numeric">
+        </div>
+        <div class="form-group">
+          <label>Deposit (Rp.)</label>
+          <input type="text" name="Deposit" class="form-control" required inputmode="numeric">
+        </div>
+        <div class="form-group">
+          <label>Balance (Rp.)</label>
+          <input type="text" name="Balance" class="form-control" readonly>
+        </div>
+        <div class="form-group">
+          <label>Passcode</label>
+          <input type="password" name="passcode" class="form-control" required>
+        </div>
+        <div class="form-group submit-btn-container">
+          <button type="submit" class="btn btn-primary">Submit Invoice</button>
+        </div>
+        <div id="result" class="mt-3"></div>
+      </form>
+    </div>
   </div>
 
   <script>
@@ -204,7 +220,7 @@
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Failed to send data.'
+          text: 'Failed to send data!'
         });
         console.error(err);
       }
